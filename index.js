@@ -68,7 +68,7 @@ client.connect(err => {
       })
   })
 
-  app.get('/admins', (req, res) => {
+  app.get('/admin', (req, res) => {
     AdminCollection.find({}).toArray((err, result) => {
       res.send(result)
     })
@@ -84,19 +84,6 @@ app.post('isAdmin', (req, res) => {
       })
 })
 
-  // app.post('/AddWorkers', (req, res) => {
-  //   const file = req.files.file;
-  //   const email = req.body.email;
-  //   const name = req.body.name;
-  //   console.log(name, email, file);
-  //   file.mv(`${__dirname}/workers/${file.name}`, err => {
-  //     if(err){
-  //       console.log(err);
-  //       return res.status(500).send({msg: 'failed to upload Image'})
-  //     }
-  //     return res.send({name:file.name, path: `${file.name}`})
-  //   })
-  // })
 
 
   // client.close();
