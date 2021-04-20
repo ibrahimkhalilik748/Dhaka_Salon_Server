@@ -74,16 +74,25 @@ client.connect(err => {
     })
   })
 
-  const isAdmin = client.db("salon").collection("admin");
-app.post('isAdmin', (req, res) => {
-  const email = req.body.email;
-  console.log(email);
-  isAdmin.find({ email: email })
+  app.post('/isAdmin', (req, res) => {
+    const email = req.body.email;
+    console.log(email);
+    AdminCollection.find({ email: email })
       .toArray((err, admin) => {
-          res.send(admin.length > 0);
+        res.send(admin.length > 0);
       })
-})
-
+  })
+  
+  const ordersCollection = client.db("salon").collection("orders");
+  app.post('/addOrder', (req, res) => {
+    const newOrders = req.body;
+    console.log('adding new Oder:', newOrders)
+    ordersCollection.insertOne(newOrders)
+      .then(result => {
+        console.log('Orders', result.insertedCount);
+        res.send(result.insertedCount > 0)
+      })
+  })
 
 
   // client.close();
